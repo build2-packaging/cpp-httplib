@@ -1,12 +1,15 @@
 : 1
 name: httplib
-version: 0.1.0-a.0.z
+version: 0.6.5
 project: cpp-httplib
-summary: httplib C++ library
-license: proprietary
+summary: A C++ header-only HTTP/HTTPS server and client library
+license: MIT
 description-file: README.md
-url: https://example.org/cpp-httplib
+url: https://github.com/yhirose/cpp-httplib
 email: mb@64k.by
 depends: * build2 >= 0.12.0
 depends: * bpkg >= 0.12.0
-#depends: libhello ^1.0.0
+depends: libssl
+depends: libcrypto
+depends: libz
+requires: rtti
