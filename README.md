@@ -1,6 +1,6 @@
 # cpp-httplib
 
-a single header only ( for better or worse ) http library.
+a single header only ( for better or worse ) client and server http(s) library.
 
 problably gets you pwned.
 
