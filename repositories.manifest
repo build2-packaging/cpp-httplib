@@ -1,0 +1,10 @@
+: 1
+summary: cpp-httplib project repository
+
+:
+role: prerequisite
+location: https://git.build2.org/packaging/openssl/openssl.git
+
+:
+role: prerequisite
+location: https://git.build2.org/packaging/zlib/zlib.git
