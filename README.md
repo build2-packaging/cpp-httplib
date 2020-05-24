@@ -2,7 +2,7 @@
 
 a single header only ( for better or worse ) client and server http(s) library.
 
-problably gets you pwned.
+problably gets you pwned ( no offense to the author! ).
 
 ```cpp
 //  derived from: client.cc
@@ -48,6 +48,12 @@ int main(int argc, char* argv[]) {
 }
 ```
 
+## packaging
+
+as you can see in the above example users of the library have to include
+`<httplib/httplib.hxx>`. the `build2` library automatically promotes
+`-DCPPHTTPLIB_OPENSSL_SUPPORT` and `-DCPPHTTPLIB_ZLIB_SUPPORT`.
+
 ## dependencies
 
   - openssl ( libcrypto, libssl )
@@ -63,3 +69,9 @@ $ bdep init -C @clang10 cc \
   config.cxx.coptions="-Wall -Wextra -Ofast -flto -stdlib=libc++" -- \
   '?sys:libcrypto/*' '?sys:libssl/*' '?sys:libz/*'
 ```
+
+## TODO
+
+  - [ ] package all / more examples
+  - [ ] provide `testscript`s
+  - [ ] provide a fuzzing target for clang's `-fsanitize=fuzzer`
