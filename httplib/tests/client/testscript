@@ -1,0 +1,5 @@
+: missing-parameter
+:
+$* 2>>EOE != 0
+usage: driver <ca-bundle.crt>
+EOE
