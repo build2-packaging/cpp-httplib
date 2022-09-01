@@ -17,4 +17,8 @@
 # Use `binary` to make sure certain files are never auto-detected as text.
 #
 #*.png binary
-cpp-httplib-tests/cpp-httplib-tests/test symlink=dir
+cpp-httplib-tests/cpp-httplib-tests/test/fuzzing symlink=dir
+cpp-httplib-tests/cpp-httplib-tests/test/proxy symlink=dir
+cpp-httplib-tests/cpp-httplib-tests/test/www symlink=dir
+cpp-httplib-tests/cpp-httplib-tests/test/www2 symlink=dir
+cpp-httplib-tests/cpp-httplib-tests/test/www3 symlink=dir
