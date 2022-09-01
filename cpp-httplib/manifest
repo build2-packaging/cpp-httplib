@@ -5,6 +5,7 @@ summary: A C++11 single-file header-only cross platform HTTP/HTTPS library.
 license: MIT
 description-file: README.md
 url: https://github.com/yhirose/cpp-httplib
+requires: c++11
 depends: * build2 >= 0.15.0
 depends: * bpkg >= 0.15.0
 depends: * libbrotli >= 1.0.9
