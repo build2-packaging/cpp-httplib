@@ -1,0 +1,6 @@
+project = cpp-httplib-tests
+
+using version
+using config
+using test
+using dist

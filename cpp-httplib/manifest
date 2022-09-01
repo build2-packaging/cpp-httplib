@@ -1,0 +1,10 @@
+: 1
+name: cpp-httplib
+version: 0.11.1
+summary: A C++11 single-file header-only cross platform HTTP/HTTPS library.
+license: MIT
+description-file: README.md
+url: https://github.com/yhirose/cpp-httplib
+depends: * build2 >= 0.15.0
+depends: * bpkg >= 0.15.0
+tests: cpp-httplib-tests == $

@@ -1,0 +1,25 @@
+intf_libs = # Interface dependencies.
+#import xxxx_libs += libhello%lib{hello}
+
+lib{cpp-httplib}: {hxx}{**} $intf_libs
+
+# Build options.
+#
+cxx.poptions =+ "-I$out_root/cpp-httplib" "-I$src_root/cpp-httplib"
+
+# Export options.
+#
+lib{cpp-httplib}:
+{
+  cxx.export.poptions = "-I$out_root/cpp-httplib" "-I$src_root/cpp-httplib"
+  cxx.export.libs = $intf_libs
+}
+
+# Install into the cpp-httplib/ subdirectory of, say, /usr/include/
+# recreating subdirectories.
+#
+{hxx}{*}:
+{
+  install         = include/
+  install.subdirs = true
+}

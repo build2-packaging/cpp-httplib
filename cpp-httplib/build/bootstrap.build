@@ -1,0 +1,6 @@
+project = cpp-httplib
+
+using version
+using config
+using install
+using dist

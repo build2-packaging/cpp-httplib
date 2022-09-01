@@ -1,0 +1,11 @@
+: 1
+name: cpp-httplib-tests
+version: 0.11.1
+project: cpp-httplib
+summary: Tests package for cpp-httplib library
+license: MIT
+description-file: README.md
+url: https://github.com/yhirose/cpp-httplib
+depends: * build2 >= 0.15.0
+depends: * bpkg >= 0.15.0
+depends: gtest ^1.11.0
