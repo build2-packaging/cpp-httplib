@@ -1,5 +1,6 @@
-intf_libs = # Interface dependencies.
-#import xxxx_libs += libhello%lib{hello}
+import int_libs += libbrotli%lib{brotli}
+import int_libs += openssl%lib{openssl}
+import int_libs += libz%lib{z}
 
 lib{cpp-httplib}: {hxx}{**} $intf_libs
 
