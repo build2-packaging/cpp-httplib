@@ -1,18 +1,19 @@
 import intf_libs  = libbrotli%lib{brotli}
-import intf_libs += openssl%lib{openssl} # @@ Bogus!
+import intf_libs += libssl%lib{ssl}
+import intf_libs += libcrypto%lib{crypto}
 import intf_libs += libz%lib{z}
 
 lib{cpp-httplib}: hxx{httplib} $intf_libs
 
 # Build options.
 #
-cxx.poptions =+ "-I$src_base"
+cxx.poptions =+ "-I$src_base" "-DCPPHTTPLIB_OPENSSL_SUPPORT" "-DCPPHTTPLIB_ZLIB_SUPPORT" "-DCPPHTTPLIB_BROTLI_SUPPORT"
 
 # Export options.
 #
 lib{cpp-httplib}:
 {
-  cxx.export.poptions = "-I$src_base"
+  cxx.export.poptions = "-I$src_base" "-DCPPHTTPLIB_OPENSSL_SUPPORT" "-DCPPHTTPLIB_ZLIB_SUPPORT" "-DCPPHTTPLIB_BROTLI_SUPPORT"
   cxx.export.libs = $intf_libs
 }
 
