@@ -1,26 +1,22 @@
-import int_libs += libbrotli%lib{brotli}
-import int_libs += openssl%lib{openssl}
-import int_libs += libz%lib{z}
+import intf_libs  = libbrotli%lib{brotli}
+import intf_libs += openssl%lib{openssl} # @@ Bogus!
+import intf_libs += libz%lib{z}
 
-lib{cpp-httplib}: {hxx}{**} $intf_libs
+lib{cpp-httplib}: hxx{httplib} $intf_libs
 
 # Build options.
 #
-cxx.poptions =+ "-I$out_root/cpp-httplib" "-I$src_root/cpp-httplib"
+cxx.poptions =+ "-I$src_base"
 
 # Export options.
 #
 lib{cpp-httplib}:
 {
-  cxx.export.poptions = "-I$out_root/cpp-httplib" "-I$src_root/cpp-httplib"
+  cxx.export.poptions = "-I$src_base"
   cxx.export.libs = $intf_libs
 }
 
-# Install into the cpp-httplib/ subdirectory of, say, /usr/include/
-# recreating subdirectories.
+# Install directly into, say, /usr/include/, since it's one header 
+# named after the library.
 #
-{hxx}{*}:
-{
-  install         = include/
-  install.subdirs = true
-}
+hxx{httplib}: install = include/
