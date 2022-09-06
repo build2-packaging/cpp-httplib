@@ -21,4 +21,4 @@ lib{cpp-httplib}:
 # Install directly into, say, /usr/include/, since it's one header 
 # named after the library.
 #
-hxx{httplib}: install = include/
+hxx{*}: install = include/
