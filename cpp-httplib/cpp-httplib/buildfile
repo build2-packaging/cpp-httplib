@@ -1,4 +1,5 @@
-import intf_libs  = libbrotli%lib{brotli}
+import intf_libs += libbrotli%lib{brotlienc}
+import intf_libs += libbrotli%lib{brotlidec}
 import intf_libs += libssl%lib{ssl}
 import intf_libs += libcrypto%lib{crypto}
 import intf_libs += libz%lib{z}
