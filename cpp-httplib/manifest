@@ -8,8 +8,8 @@ url: https://github.com/yhirose/cpp-httplib
 requires: c++11
 depends: * build2 >= 0.15.0
 depends: * bpkg >= 0.15.0
-depends: * libbrotli >= 1.0.9
-depends: * libz >= 1.2.12
+depends: libbrotli >= 1.0.9
+depends: libz >= 1.2.12
 depends: libcrypto ^1.1.1
 depends: libssl ^1.1.1
 tests: cpp-httplib-tests == $

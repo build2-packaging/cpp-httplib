@@ -1,23 +1,56 @@
 import libs = cpp-httplib%lib{cpp-httplib}
 import libs += gtest%lib{gtest}
 
+import! openssl = openssl%exe{openssl}
+
 # @@ test/main.cc: consider using liba{gtest_main} instead?
 
-exe{cpp-httplib-tests}: test/{hxx ixx txx cxx}{**} $libs
+exe{cpp-httplib-tests}: {hxx ixx txx cxx}{**} $libs
 
-# Disable upstream failing tests
-exe{cpp-httplib-tests}: test.options = "--gtest_filter=-\
-*ChunkedEncodingTest*:\
-BaseAuthTest.NoSSL:\
-RedirectTest.HTTPBinNoSSLBasic:\
-ServerTest.HeadMethod200Static:\
-ServerTest.GetMethodDir:\
-ServerTest.GetMethodDirTest:\
-ServerTest.GetMethodDirTestWithDoubleDots:\
-ServerTest.GetMethodDirMountTest:\
-ServerTest.GetMethodDirMountTestWithDoubleDots:\
-ServerTest.UserDefinedMIMETypeMapping:\
-ServerTest.StaticFileRange:\
-MountTest.Unmount:\
-ProxyTest.NoSSLBasic:\
-ClientProblemDetectionTest.ContentProvider"
+define pem: file
+pem{*}: extension = pem
+exe{cpp-httplib-tests}: pem{key rootCA.key client.key cert cert2 key_encrypted cert_encrypted rootCA.cert client.cert}: test.input = true
+
+cxx.poptions =+ "-DCERT_PATH=\"$out_base\""
+
+pem{key rootCA.key client.key}: $openssl
+{{
+    diag openssl genrsa $>
+    $openssl genrsa 2048 >$path($>)
+}}
+
+pem{key_encrypted}: $openssl
+{{
+    diag genrsa $>
+    $openssl genrsa -passout pass:test123! 2048 > $path($>)
+}}
+
+pem{cert_encrypted}: pem{key_encrypted} test.conf $openssl
+{{
+    diag openssl x509 $>
+    $openssl req -new -batch -config $path($<[1]) -key $path($<[0]) | $openssl x509 -days 3650 -req -signkey $path($<[0]) > $path($>)
+}}
+
+pem{cert}: pem{key} test.conf $openssl
+{{
+    diag openssl x509 $>
+    $openssl req -new -batch -config $path($<[1]) -key $path($<[0]) | $openssl x509 -days 3650 -req -signkey $path($<[0]) > $path($>)
+}}
+
+pem{cert2}: pem{key} test.conf $openssl
+{{
+    diag req $>
+    $openssl req -x509 -config $path($<[1]) -key $path($<[0]) -sha256 -days 3650 -nodes -out $path($>) -extensions SAN
+}}
+
+pem{rootCA.cert}: pem{rootCA.key} test.rootCA.conf $openssl
+{{
+    diag req $>
+    $openssl req -x509 -new -batch -config $path($<[1]) -key $path($<[0]) -days 1024 > $path($>)
+}}
+
+pem{client.cert}: pem{client.key} pem{rootCA.cert} pem{rootCA.key} test.conf $openssl
+{{
+    diag openssl x509 $>
+    $openssl req -new -batch -config $path($<[3]) -key $path($<[0]) | $openssl x509 -days 370 -req -CA $path($<[1]) -CAkey $path($<[2]) -CAcreateserial > $path($>)
+}}

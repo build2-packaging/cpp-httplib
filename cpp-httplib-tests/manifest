@@ -9,3 +9,4 @@ url: https://github.com/yhirose/cpp-httplib
 depends: * build2 >= 0.15.0
 depends: * bpkg >= 0.15.0
 depends: gtest ^1.11.0
+depends: * openssl ^1.1.1
