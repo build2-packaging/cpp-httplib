@@ -1,9 +1,7 @@
 import libs = cpp-httplib%lib{cpp-httplib}
-import libs += gtest%lib{gtest}
+import libs += gtest%liba{gtest_main}
 
 import! openssl = openssl%exe{openssl}
-
-# @@ test/main.cc: consider using liba{gtest_main} instead?
 
 exe{cpp-httplib-tests}: {hxx ixx txx cxx}{**} $libs
 
